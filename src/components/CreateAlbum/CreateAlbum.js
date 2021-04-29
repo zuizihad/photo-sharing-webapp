@@ -14,7 +14,7 @@ const CreateAlbum = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://localhost:5000/user/createAlbum`, { ...album })
+            await axios.post(`http://localhost:5000/api/createAlbum`, { ...album })
             alert('new album created successfully');
 
         } catch (error) {

@@ -41,9 +41,9 @@ function App() {
           <Route path="/createAlbum">
             <CreateAlbum></CreateAlbum>
           </Route>
-          <PrivateRoute path="/uploadPhoto">
+          <Route path="/uploadPhoto">
             <UploadPhoto></UploadPhoto>
-          </PrivateRoute>
+          </Route>
           <Route path="*">
             <NotFound></NotFound>
           </Route>
