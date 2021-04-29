@@ -13,6 +13,7 @@ import { createContext, useState } from 'react';
 import Profile from './components/Profile/Profile';
 import UploadPhoto from './components/UploadPhoto/UploadPhoto';
 import CreateAlbum from './components/CreateAlbum/CreateAlbum';
+import PrivateRoute from './components/Auth/PrivateRoute';
 
 export const userContext = createContext();
 function App() {
@@ -40,9 +41,9 @@ function App() {
           <Route path="/createAlbum">
             <CreateAlbum></CreateAlbum>
           </Route>
-          <Route path="/uploadPhoto">
+          <PrivateRoute path="/uploadPhoto">
             <UploadPhoto></UploadPhoto>
-          </Route>
+          </PrivateRoute>
           <Route path="*">
             <NotFound></NotFound>
           </Route>

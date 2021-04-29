@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { userContext } from '../../App';
+import axios from 'axios';
+import { useHistory, useLocation } from 'react-router';
+
 const Register = () => {
     const [user, setUser] = useState({
         name: '',
@@ -10,7 +13,10 @@ const Register = () => {
     })
     const [loggedInUser, setLoggedInUser] = useContext(userContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data, e) => {
+    const history = useHistory();
+    const location = useLocation();
+    const { from } = location.state || { from: { pathname: '/' } }
+    const onSubmit = async (data, e) => {
         e.preventDefault()
         try {
             const userData = {
@@ -18,19 +24,12 @@ const Register = () => {
                 email: data.email,
                 password: data.password
             }
-            setLoggedInUser(userData)
+            setUser(userData)
             const url = `http://localhost:5000/user/register`
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            })
-                .then(response => {
-                    alert('user created success')
-                    console.log(response.data)
-                })
+            await axios.post(url, { ...user })
+            setLoggedInUser(user)
+            alert('user created')
+            history.replace(from)
         } catch (err) {
             alert(err.response.data.msg)
         }

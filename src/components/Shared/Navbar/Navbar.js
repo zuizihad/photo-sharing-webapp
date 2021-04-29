@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
+import { userContext } from '../../../App';
 import './Navbar.css';
 
 const Navbar = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(userContext);
     return (
         <nav className="navbar navbar-expand-lg navbar-light ">
             <div className="container-fluid">
@@ -21,9 +23,18 @@ const Navbar = () => {
                         <Link to="/createAlbum" className="nav-item me-5">
                             <a className="nav-link" href="#">Create Album</a>
                         </Link>
-                        <Link to="/login" className="nav-item me-5">
-                            <a className="nav-link" href="#">Login</a>
-                        </Link>
+                        {
+                            (loggedInUser.email) ? (
+                                <Link to="" className="nav-item me-5">
+                                    <a className="nav-link" href="#">{loggedInUser.email}</a>
+                                </Link>
+                            ) : (
+                                <Link to="/login" className="nav-item me-5">
+                                    <a className="nav-link" href="#">Login</a>
+                                </Link>
+                            )
+                        }
+
                         <Link to="/profile" className="nav-item me-5">
                             <a className="nav-link" href="#" aria-disabled="true">Profile</a>
                         </Link>
