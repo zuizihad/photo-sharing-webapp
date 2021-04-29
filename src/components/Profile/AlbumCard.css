@@ -1,0 +1,9 @@
+.album-card {
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow:  7px 7px 14px #f0f0f0,
+             -7px -7px 14px #ffffff;
+    text-align: center;
+    cursor: pointer;
+    height:200px;
+}
