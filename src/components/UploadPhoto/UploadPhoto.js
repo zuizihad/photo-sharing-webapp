@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import { userContext } from '../../App.js'
 
 const UploadPhoto = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const [albums, setAlbums] = useState([])
     const [imageURL, setImageURL] = useState(null);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/getAlbum`)
+        fetch(`http://localhost:5000/api/getAlbum?email=${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setAlbums(data))
-    }, [])
+    }, [loggedInUser])
 
     const handleImage = event => {
         const imageData = new FormData()

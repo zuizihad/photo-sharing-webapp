@@ -14,6 +14,7 @@ import Profile from './components/Profile/Profile';
 import UploadPhoto from './components/UploadPhoto/UploadPhoto';
 import CreateAlbum from './components/CreateAlbum/CreateAlbum';
 import PrivateRoute from './components/Auth/PrivateRoute';
+import ImageCard from './components/Profile/ImageAlbum';
 
 export const userContext = createContext();
 function App() {
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile></Profile>
+          </Route>
+          <Route path="/album/:name">
+            <ImageCard></ImageCard>
           </Route>
           <Route path="/createAlbum">
             <CreateAlbum></CreateAlbum>

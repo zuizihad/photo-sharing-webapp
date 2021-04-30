@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import { userContext } from '../../App';
 
 const CreateAlbum = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const [album, setAlbum] = useState({
+        email: loggedInUser.email,
         albumName: '',
         albumPrivacy: '',
     })

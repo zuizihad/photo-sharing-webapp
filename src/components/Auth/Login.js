@@ -31,7 +31,7 @@ const Login = () => {
             setUser(newUserInfo);
 
             await axios.post(`http://localhost:5000/user/login`, { ...user })
-            console.log(user)
+
             setLoggedInUser(user)
             history.replace(from)
         } catch (err) {
