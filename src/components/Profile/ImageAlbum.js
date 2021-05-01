@@ -5,30 +5,13 @@ import axios from 'axios';
 
 const ImageAlbum = () => {
     const { name } = useParams();
-    const [albums, setAlbums] = useState({});
-
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/api/album/${name}`)
-    //         .then(res => res.json())
-    //         .then(data => setAlbums(data))
-    // }, [name])
-
-    // useEffect(async () => {
-    //     const result = await axios(`http://localhost:5000/api/album/${name}`)
-    //     setAlbums(result)
-    // }, [name])
+    const [albums, setAlbums] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios(
-                `http://localhost:5000/api/album/${name}`,
-            );
-
-            setAlbums(result.data);
-        };
-
-        fetchData();
-    }, [name]);
+        fetch(`http://localhost:5000/api/album/${name}`)
+            .then((res) => res.json())
+            .then(data => setAlbums(data))
+    }, []);
     return (
         <div className="container">
             <div className="row">

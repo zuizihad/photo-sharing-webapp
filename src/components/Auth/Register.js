@@ -18,21 +18,32 @@ const Register = () => {
     const { from } = location.state || { from: { pathname: '/' } }
     const onSubmit = async (data, e) => {
         e.preventDefault()
-        try {
-            const userData = {
-                name: data.name,
-                email: data.email,
-                password: data.password
-            }
-            setUser(userData)
-            const url = `http://localhost:5000/user/register`
-            await axios.post(url, { ...user })
-            setLoggedInUser(user)
-            alert('user created')
-            history.replace(from)
-        } catch (err) {
-            alert(err.response.data.msg)
+        // try {
+        const userData = {
+            name: data.name,
+            email: data.email,
+            password: data.password
         }
+        setUser(userData)
+        const url = `http://localhost:5000/user/register`
+        // await axios.post(url, { ...user })
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(response => {
+                alert('registration successfully')
+                console.log(response)
+            })
+        setLoggedInUser(user)
+        history.replace(from)
+        // } catch (err) {
+        //     alert(err.response.data.msg)
+        // }
 
     }
     return (

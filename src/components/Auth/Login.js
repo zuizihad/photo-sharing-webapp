@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { userContext } from '../../App';
-import axios from "axios";
+
 
 const Login = () => {
     const [user, setUser] = useState({
@@ -16,27 +16,27 @@ const Login = () => {
     const history = useHistory();
     const location = useLocation();
     const { from } = location.state || { from: { pathname: '/' } }
+
     const onSubmit = async data => {
-        try {
-            const userData = {
-                email: data.email,
-                password: data.password
-            }
-            // setUser(...user, userData)
-            let newUserInfo = { ...user };
-            newUserInfo = {
-                email: data.email,
-                password: data.password
-            }
-            setUser(newUserInfo);
-
-            await axios.post(`http://localhost:5000/user/login`, { ...user })
-
-            setLoggedInUser(user)
-            history.replace(from)
-        } catch (err) {
-            alert(err.response?.data?.msg)
+        let newUserInfo = { ...user };
+        newUserInfo = {
+            email: data.email,
+            password: data.password
         }
+        setUser(newUserInfo);
+        const url = `http://localhost:5000/user/login`
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newUserInfo)
+        })
+            .then(response => {
+                alert('login successfully')
+                setLoggedInUser(newUserInfo)
+                history.replace(from)
+            })
     }
     return (
         <div className="d-flex justify-content-center mt-5">

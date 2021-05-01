@@ -36,18 +36,18 @@ function App() {
           <Route path="/register">
             <Register></Register>
           </Route>
-          <Route path="/profile">
+          <PrivateRoute path="/profile">
             <Profile></Profile>
-          </Route>
+          </PrivateRoute>
           <Route path="/album/:name">
             <ImageCard></ImageCard>
           </Route>
-          <Route path="/createAlbum">
+          <PrivateRoute path="/createAlbum">
             <CreateAlbum></CreateAlbum>
-          </Route>
-          <Route path="/uploadPhoto">
+          </PrivateRoute>
+          <PrivateRoute path="/uploadPhoto">
             <UploadPhoto></UploadPhoto>
-          </Route>
+          </PrivateRoute>
           <Route path="*">
             <NotFound></NotFound>
           </Route>

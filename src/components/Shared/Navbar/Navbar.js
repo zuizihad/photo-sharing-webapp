@@ -34,10 +34,12 @@ const Navbar = () => {
                                 </Link>
                             )
                         }
-
-                        <Link to="/profile" className="nav-item me-5">
-                            <a className="nav-link" href="#" aria-disabled="true">Profile</a>
-                        </Link>
+                        {
+                            loggedInUser.email &&
+                            <Link to="/profile" className="nav-item me-5">
+                                <a className="nav-link" href="#" aria-disabled="true">Profile</a>
+                            </Link>
+                        }
                     </ul>
                 </div>
             </div>
