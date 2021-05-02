@@ -5,12 +5,8 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { userContext } from '../../App';
 
-
 const Login = () => {
-    const [user, setUser] = useState({
-        email: '',
-        password: '',
-    })
+    const [user, setUser] = useState([])
     const [loggedInUser, setLoggedInUser] = useContext(userContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const history = useHistory();
@@ -23,7 +19,6 @@ const Login = () => {
             email: data.email,
             password: data.password
         }
-        setUser(newUserInfo);
         const url = `http://localhost:5000/user/login`
         fetch(url, {
             method: 'POST',
@@ -32,10 +27,19 @@ const Login = () => {
             },
             body: JSON.stringify(newUserInfo)
         })
-            .then(response => {
-                alert('login successfully')
-                setLoggedInUser(newUserInfo)
-                history.replace(from)
+            .then(result => result.json())
+            .then(data => {
+                if (data.user) {
+                    alert(data.msg)
+                    setUser(newUserInfo)
+                    setLoggedInUser(newUserInfo)
+                    history.replace(from)
+                } else {
+                    alert(data.msg)
+                }
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
     return (
@@ -44,21 +48,20 @@ const Login = () => {
                 <div className="card-body">
                     <h2 className="text-center text-secondary my-3">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">E</span>
-                            <input type="text" {...register("email", { required: true })} class="form-control" placeholder="Email" aria-label="password" aria-describedby="basic-addon1" />
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="basic-addon1">E</span>
+                            <input type="text" {...register("email", { required: true })} className="form-control" placeholder="Email" aria-label="password" aria-describedby="basic-addon1" />
                         </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">P</span>
-                            <input type="password" {...register("password", { required: true })} class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon1" />
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="basic-addon1">P</span>
+                            <input type="password" {...register("password", { required: true })} className="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon1" />
                         </div>
-                        <div className="text-center"><button type="submit" class="btn btn-secondary ">login</button></div>
+                        <div className="text-center"><button type="submit" className="btn btn-secondary ">login</button></div>
                         <div><p>create a new account?<Link to="/register">register</Link></p></div>
                     </form>
                 </div>
             </div>
         </div>
-
     );
 };
 

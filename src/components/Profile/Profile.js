@@ -12,7 +12,7 @@ const Profile = () => {
             .then(data => setAlbums(data))
     }, [loggedInUser])
     return (
-        <div className="container">
+        <div className="container mt-5">
             <div className="row">
                 {
                     albums.map(album => <AlbumCard key={album._id} album={album}></AlbumCard>)

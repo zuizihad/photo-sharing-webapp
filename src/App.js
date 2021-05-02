@@ -18,7 +18,7 @@ import ImageCard from './components/Profile/ImageAlbum';
 
 export const userContext = createContext();
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState([]);
   return (
     <userContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>

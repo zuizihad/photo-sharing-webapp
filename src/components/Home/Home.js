@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { userContext } from '../../App';
+import React, { useEffect, useState } from 'react';
 import AlbumCard from './AlbumCard';
 
 const Home = () => {
     const [albums, setAlbums] = useState([])
-    const [loggedInUser, setLoggedInUser] = useContext(userContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/getPublicAlbum?privacy=${'public'}`)
             .then(res => res.json())
             .then(data => setAlbums(data))
+            .catch(err => console.log(err))
     }, [])
     return (
-        <div className="container">
+        <div className="container mt-5">
             <div className="row">
                 {
                     albums.map(album => <AlbumCard album={album}></AlbumCard>)
