@@ -33,6 +33,7 @@ const UploadPhoto = () => {
             albumName: data.albumName,
             imageURL: imageURL
         }
+        console.log(albumImageData)
         const url = `http://localhost:5000/api/uploadImage`
         fetch(url, {
             method: 'POST',
@@ -41,9 +42,8 @@ const UploadPhoto = () => {
             },
             body: JSON.stringify(albumImageData)
         })
-            .then(response => {
-                alert('new Image added successfully')
-            })
+            .then(res => res.json())
+            .then(data => alert(data.msg))
     };
     return (
         <div className="d-flex justify-content-center mt-5">

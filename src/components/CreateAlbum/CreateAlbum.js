@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
 import { userContext } from '../../App';
 
 const CreateAlbum = () => {
@@ -16,12 +15,16 @@ const CreateAlbum = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await axios.post(`http://localhost:5000/api/createAlbum`, { ...album })
-            alert('new album created successfully');
-        } catch (error) {
-            console.log(error)
-        }
+        const url = `http://localhost:5000/api/createAlbum`
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(album)
+        })
+            .then(res => res.json())
+            .then(data => alert(data.msg))
     }
     return (
         <div className="d-flex justify-content-center mt-5">
@@ -31,10 +34,10 @@ const CreateAlbum = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="input-group mb-3">
                             <span className="input-group-text" id="basic-addon1">A</span>
-                            <input type="text" onBlur={handleChange} name="albumName" className="form-control" placeholder="Album Name" aria-label="name" aria-describedby="basic-addon1" />
+                            <input type="text" onBlur={handleChange} required name="albumName" className="form-control" placeholder="Album Name" aria-label="name" aria-describedby="basic-addon1" />
                         </div>
                         <div className="input-group mb-3">
-                            <select className="form-select" onClick={handleChange} name="albumPrivacy" id="inputGroupSelect03" aria-label="Example select with button addon">
+                            <select className="form-select" required onClick={handleChange} name="albumPrivacy" id="inputGroupSelect03" aria-label="Example select with button addon">
                                 <option selected>select photo album privacy</option>
                                 <option value="private">private</option>
                                 <option value="public">public</option>
