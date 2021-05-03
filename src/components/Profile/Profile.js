@@ -7,7 +7,7 @@ const Profile = () => {
     const [albums, setAlbums] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/getAlbum?email=${loggedInUser.email}`)
+        fetch(`https://shrouded-plains-92067.herokuapp.com/api/getAlbum?email=${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setAlbums(data))
     }, [loggedInUser])

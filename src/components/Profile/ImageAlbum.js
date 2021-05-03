@@ -7,7 +7,7 @@ const ImageAlbum = () => {
     const [albums, setAlbums] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/album/${name}`)
+        fetch(`https://shrouded-plains-92067.herokuapp.com/api/album/${name}`)
             .then((res) => res.json())
             .then(data => setAlbums(data))
     }, [name]);

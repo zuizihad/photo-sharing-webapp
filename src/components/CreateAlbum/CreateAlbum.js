@@ -15,7 +15,7 @@ const CreateAlbum = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = `http://localhost:5000/api/createAlbum`
+        const url = `https://shrouded-plains-92067.herokuapp.com/api/createAlbum`
         fetch(url, {
             method: 'POST',
             headers: {

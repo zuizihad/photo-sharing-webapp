@@ -10,7 +10,7 @@ const UploadPhoto = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/getAlbum?email=${loggedInUser.email}`)
+        fetch(`https://shrouded-plains-92067.herokuapp.com/api/getAlbum?email=${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setAlbums(data))
     }, [loggedInUser])
@@ -34,7 +34,7 @@ const UploadPhoto = () => {
             imageURL: imageURL
         }
         console.log(albumImageData)
-        const url = `http://localhost:5000/api/uploadImage`
+        const url = `https://shrouded-plains-92067.herokuapp.com/api/uploadImage`
         fetch(url, {
             method: 'POST',
             headers: {

@@ -5,7 +5,7 @@ const Home = () => {
     const [albums, setAlbums] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/getPublicAlbum?privacy=${'public'}`)
+        fetch(`https://shrouded-plains-92067.herokuapp.com/api/getPublicAlbum?privacy=${'public'}`)
             .then(res => res.json())
             .then(data => setAlbums(data))
             .catch(err => console.log(err))

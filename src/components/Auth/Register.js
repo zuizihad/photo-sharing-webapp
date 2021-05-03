@@ -24,7 +24,7 @@ const Register = () => {
             password: data.password
         }
         setUser(userData)
-        const url = `http://localhost:5000/user/register`
+        const url = `https://shrouded-plains-92067.herokuapp.com/user/register`
         fetch(url, {
             method: 'POST',
             headers: {
